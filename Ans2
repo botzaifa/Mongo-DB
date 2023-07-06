@@ -1,0 +1,32 @@
+result = db.students.find({ "Experience.company": "CDE Corp" }, { "name": 1, "_id": 0 })
+for doc in result:
+    print(doc["name"])
+
+
+count = db.students.count_documents({ "Experience.company": "CDE Corp" })
+print(count)
+
+
+count = db.students.count_documents({ "Experience": { "$size": 3 } })
+print(count)
+
+
+count = db.students.count_documents({ "hobbies": { "$in": ["walking", "reading"] } })
+print(count)
+
+
+result = db.projects.find({
+    "product": {
+        "$elemMatch": {
+            "name": "apple",
+            "quantity": 15
+        }
+    }
+})
+for doc in result:
+    print(doc)
+
+
+result = db.students.find({ "age": { "$lte": 30 } })
+for doc in result:
+    print(doc)
