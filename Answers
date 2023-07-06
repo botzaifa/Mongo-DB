@@ -1,1 +1,44 @@
+db.students.find({ "Experience.company": "CDE Corp" }, { "name": 1, "_id": 0 })
 
+db.students.count({ "Experience.company": "CDE Corp" })
+
+db.students.count({ "Experience": { "$size": 3 } })
+
+db.students.count({ "hobbies": { "$in": ["walking", "reading"] } })
+
+
+db.projects.insertMany([
+  {
+    "product": [
+      { "name": "apple", "quantity": 20 },
+      { "name": "mango", "quantity": 15 },
+      { "name": "banana", "quantity": 10 }
+    ]
+  },
+  {
+    "product": [
+      { "name": "orange", "quantity": 18 },
+      { "name": "pear", "quantity": 12 },
+      { "name": "grape", "quantity": 8 }
+    ]
+  },
+  {
+    "product": [
+      { "name": "watermelon", "quantity": 25 },
+      { "name": "pineapple", "quantity": 17 },
+      { "name": "strawberry", "quantity": 13 }
+    ]
+  },
+  // Add more documents here...
+]);
+
+db.projects.find({
+  "product": {
+    "$elemMatch": {
+      "name": "apple",
+      "quantity": 15
+    }
+  }
+})
+
+db.students.find({ "age": { "$lte": 30 } })
